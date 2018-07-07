@@ -4,7 +4,7 @@ class Addresser
     return unprocessable_entity if query.empty?
 
     postcode = query.split("=")[1]
-    return unprocessable_entity if postcode.nil?
+    return unprocessable_entity if postcode.to_i.zero?
 
     [200, {"content-type" => "application/json"}, [fetch(postcode)]]
   end
