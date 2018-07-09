@@ -1,4 +1,4 @@
-FROM lkwg82/h2o-http2-server
+FROM yyagi/h2o.docker
 
 RUN mkdir /etc/h2o/scripts
 ADD scripts/* /etc/h2o/scripts/
