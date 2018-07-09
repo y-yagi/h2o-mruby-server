@@ -17,8 +17,21 @@ class Addresser
   end
 
   def fetch(postcode)
-    url = "https://postcode-jp.appspot.com/api/postcode?general=true&office=false&postcode=#{postcode}"
-    address = http_request(url).join[2].join
+    redis = H2O::Redis.new(host: 'redis', port: 16379)
+    redis.connect
+    cached = redis.get(postcode.to_s).join
+
+    if cached.nil?
+      url = "https://postcode-jp.appspot.com/api/postcode?general=true&office=false&postcode=#{postcode}"
+      status, _, body = http_request(url).join
+      cached = body.join
+
+      if status == 200
+        redis.set(postcode, cached, { :ex => 3600 })
+      end
+    end
+
+    cached
   end
 end
 
