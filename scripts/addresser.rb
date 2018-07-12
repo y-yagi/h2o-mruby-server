@@ -27,7 +27,7 @@ class Addresser
       cached = body.join
 
       if status == 200
-        redis.set(postcode, cached, { :ex => 3600 })
+        redis.set(postcode, cached, { ex: 3600 }).join
       end
     end
 
