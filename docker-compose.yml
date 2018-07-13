@@ -5,7 +5,7 @@ services:
     container_name: h2o_mruby_server
     ports:
       - 8080:8080
-    image: y-yagi/h2o-mruby-server
+    image: yyagi/h2o-mruby-server
     depends_on:
       - redis
 
