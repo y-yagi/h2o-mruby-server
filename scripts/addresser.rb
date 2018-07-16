@@ -9,8 +9,6 @@ class Addresser
     [200, {"content-type" => "application/json"}, [fetch(postcode)]]
   end
 
-  private
-
   def unprocessable_entity
     res = "invalid request".to_json
     [422, {"content-type" => "application/json"}, [res]]
